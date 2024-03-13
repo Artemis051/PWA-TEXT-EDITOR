@@ -42,19 +42,21 @@ module.exports = () => {
       rules: [
         // TODO: Add CSS loaders and babel to webpack.
         {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
+          test: /\.css$/, // This regex identifies CSS files
+          use: ['style-loader', 'css-loader'] // Use these loaders for CSS files
         },
+
+        // Rules for JavaScript files
         {
-          test: /\.m?js$/,
-          exclude: /(node_modules|bower_components)/,
+          test: /\.m?js$/, // This regex identifies JavaScript files
+          exclude: /(node_modules|bower_components)/, // Exclude these directories
           use: {
-            loader: 'babel-loader',
+            loader: 'babel-loader', // Use babel-loader
             options: {
-              presets: ['@babel/preset-env'],
-            },
-          },
-        },
+              presets: ['@babel/preset-env'] // Use preset-env for babel
+            }
+          } 
+        }
       ],
     },
   };

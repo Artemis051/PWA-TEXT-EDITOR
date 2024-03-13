@@ -24,7 +24,7 @@ export const putDb = async (content) => {
   const store = tx.objectStore('jate');
 
   // Add provided content to the store
-  const request = store.add({ content });
+  const request = store.add({id:1, content });
   
   // Wait for add operation to complete and log the result
   const result = await request;
@@ -48,7 +48,7 @@ export const getDb = async () => {
   const result = await request;
 
   // return the content of the last item in the database
-  return result.at(-1)?.content; 
+  return result?.content; 
 };
 
 // initialize the IndexedDB database

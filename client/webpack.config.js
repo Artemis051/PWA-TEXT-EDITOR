@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const { url } = require('inspector');
 
 module.exports = () => {
   return {
@@ -22,18 +23,21 @@ module.exports = () => {
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
-        swDest: 'service-worker.js',
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
-        name: 'App Name',
-        short_name: 'App',
-        description: 'Your application description',
+        fingerprints:false, inject:true,
+        name: 'Just another Text Editor',
+        short_name: 'Jate',
+        description: 'test-editor',
         background_color: '#ffffff',
-        crossorigin: 'use-credentials',
+        theme_color:'#225ca3',
+        start_url:"/",publicPath:"/",
         icons: [
           {
-            src: path.resolve('src/images/icon.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512], 
+            destination: path.join("assets", "icons")
           },
         ],
       }),

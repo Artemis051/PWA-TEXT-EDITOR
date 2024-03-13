@@ -16,17 +16,11 @@ const initdb = async () =>
 export const putDb = async (content) => {
   // open connection to the jate db with version 1
   const jateDb = await openDB('jate', 1);
-
   // start a read-write transaction on the jate db to allow changes in data
   const tx = jateDb.transaction('jate', 'readwrite');
-
-  // Access the jate object store from transaction
   const store = tx.objectStore('jate');
-
   // Add provided content to the store
   const request = store.add({id:1, content });
-  
-  // Wait for add operation to complete and log the result
   const result = await request;
 };
 
@@ -34,23 +28,13 @@ export const putDb = async (content) => {
 export const getDb = async () => {
   // open a connection to the jate db with version 1
   const jateDb = await openDB('jate', 1);
-
   // start a read-only transaction on the jate db to get data
   const tx = jateDb.transaction('jate', 'readonly');
-
-  // accesses the jate object store from transaction
+// accesses the jate object store from transaction
   const store = tx.objectStore('jate');
-
-  // Retrieve all records from the store
   const request = store.getAll();
-
-  // Wait for the fetch operation to complete and logs the results
   const result = await request;
-
-  // return the content of the last item in the database
   return result?.content; 
 };
-
-// initialize the IndexedDB database
 initdb();
 
